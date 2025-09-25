@@ -1,8 +1,0 @@
-{
-  "env": {
-    "NEXTAUTH_SECRET": "@nextauth_secret",
-    "NEXTAUTH_URL": "@nextauth_url",
-    "NEXT_PUBLIC_TRUST_HOST": "true",
-    "NEXT_PUBLIC_BASE_URL": "@next_public_base_url"
-  }
-}
