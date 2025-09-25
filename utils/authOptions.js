@@ -50,6 +50,7 @@ async function refreshTokenHandler(token) {
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true, // Always trust host in production
+  debug: process.env.NODE_ENV === "development",
   providers: [
     // login for superAdmin
     CredentialsProvider({
@@ -202,5 +203,5 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: {
     strategy: "jwt", // Ensure you're using JWT-based sessions
   },
-  secret: process.env.NEXTAUTH_SECRET || "fallback-secret-for-development",
+  secret: process.env.NEXTAUTH_SECRET || "inventory-system-production-secret-key-2024",
 });

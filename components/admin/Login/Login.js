@@ -46,10 +46,13 @@ const Login = () => {
 
       if (data?.error) {
         setLoading(false);
+        const errorMessage = data.error === 'CredentialsSignin' 
+          ? "Invalid email or password. Please try again." 
+          : data.error || "Something went wrong!";
         setError({
           errors: {
             common: {
-              msg: data.error || "Something went wrong!",
+              msg: errorMessage,
             },
           },
         });
