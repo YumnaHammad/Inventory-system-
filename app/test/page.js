@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function TestPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -12,12 +14,12 @@ export default function TestPage() {
           <p>Trust Host: {process.env.NEXT_PUBLIC_TRUST_HOST || 'Not set'}</p>
         </div>
         <div className="mt-6">
-          <a 
+          <Link 
             href="/"
             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
           >
             Go to Login
-          </a>
+          </Link>
         </div>
       </div>
     </div>
