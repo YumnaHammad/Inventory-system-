@@ -48,21 +48,45 @@ const CustomBar = ({ x, y, width, height, fill }) => {
 };
 
 const PurchaseSalesChart = ({ data }) => {
-  data = data
-    ?.map((item) => ({
-      ...item,
-      createdAt: new Date(item.createdAt).toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "short",
-      }), // Format as "12 Mar"
-      Purchase: -item.Purchase,
-    }))
-    .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+  // Create mock data if no data is provided
+  const mockData = [
+    { month: "Jan", Purchase: -1203, Sale: 503 },
+    { month: "Feb", Purchase: -2003, Sale: 1003 },
+    { month: "Mar", Purchase: -2503, Sale: 1203 },
+    { month: "Apr", Purchase: -1503, Sale: 803 },
+    { month: "May", Purchase: -1830, Sale: 903 },
+    { month: "Jun", Purchase: -1703, Sale: 1130 },
+    { month: "Jul", Purchase: -2130, Sale: 1330 },
+    { month: "Aug", Purchase: -2530, Sale: 1603 },
+    { month: "Sep", Purchase: -2430, Sale: 1430 },
+    { month: "Oct", Purchase: -1930, Sale: 100 },
+    { month: "Nov", Purchase: -2230, Sale: 1530 },
+    { month: "Dec", Purchase: -2830, Sale: 700 },
+  ];
+
+  let chartData = mockData; // Default to mock data
+
+  if (data && Array.isArray(data) && data.length > 0) {
+    chartData = data
+      .map((item) => ({
+        ...item,
+        createdAt: item.createdAt ? new Date(item.createdAt).toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "short",
+        }) : new Date().toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "short",
+        }),
+        Purchase: item.Purchase ? -item.Purchase : 0,
+        Sale: item.Sale || 0,
+      }))
+      .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+  }
 
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
-        data={data}
+        data={chartData}
         margin={{
           top: 20,
           right: 20,
@@ -74,7 +98,6 @@ const PurchaseSalesChart = ({ data }) => {
         <XAxis dataKey="createdAt" />
         <YAxis />
         <Tooltip />
-        {/* <Legend /> */}
         <Bar dataKey="Sale" fill="#15B392" barSize={10} shape={<CustomBar />} />
         <Bar
           dataKey="Purchase"

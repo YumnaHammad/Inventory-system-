@@ -18,6 +18,9 @@ const PurchaseSaleSection = ({ data }) => {
     setNewDate(date);
     alert(date?.getFullYear());
   };
+
+  // Ensure we have data or use mock data
+  const chartData = data || [];
   return (
     <>
       <div className="flex flex-wrap items-center justify-between lg:flex-nowrap">
@@ -44,8 +47,8 @@ const PurchaseSaleSection = ({ data }) => {
       </div>
 
       {/* Purchase and Sales Chart */}
-      <div className="h-full max-h-[370px] w-full">
-        <PurchaseSalesChart data={data} />
+      <div className="h-[370px] w-full">
+        <PurchaseSalesChart data={chartData} />
       </div>
     </>
   );

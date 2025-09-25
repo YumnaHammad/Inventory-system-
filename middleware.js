@@ -57,4 +57,11 @@ export async function middleware(request) {
   }
 }
 
-export const config = { matcher: ["/", "/admin/:path*", "/superadmin/:path*"] };
+export const config = { 
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.png$|.*\\.jpg$|.*\\.jpeg$|.*\\.gif$|.*\\.svg$).*)",
+    "/",
+    "/admin/:path*", 
+    "/superadmin/:path*"
+  ] 
+};
